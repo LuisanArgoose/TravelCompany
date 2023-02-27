@@ -1,0 +1,95 @@
+﻿<Window x:Class="Travel.V.TrWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Travel.V"
+        xmlns:vm="clr-namespace:Travel.VM"
+        mc:Ignorable="d"
+        Title="TrWindow" Height="450" Width="800">
+    <Window.DataContext>
+        <vm:MTr/>
+    </Window.DataContext>
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="2,2,2,2"/>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="120px"/>
+            <ColumnDefinition Width="120px" />
+
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Button Command="{Binding ExitButtonCom}" Grid.Row="0" Grid.Column="0" Content="Выйти"></Button>
+        <Button Command="{Binding ReloadButtonCom}" Grid.Row="0" Grid.Column="1" Content="Обновить"></Button>
+        <TabControl Grid.Row="1" Grid.ColumnSpan="3" SelectedIndex="{Binding SelectedIndex}">
+
+            <TabItem>
+                <TabItem.Header>
+                    <Label Content="Выставленные заявки"/>
+                </TabItem.Header>
+                <TabItem.Content>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="180px"/>
+                            <ColumnDefinition Width="180px" />
+                            <ColumnDefinition Width="180px" />
+                            <ColumnDefinition Width="180px" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="25" />
+                        </Grid.RowDefinitions>
+                        <DataGrid Grid.Row="0" Grid.ColumnSpan="5" ItemsSource="{Binding AwaitingTransport}" SelectedItem="{Binding AwaitingSelectedItem}" CanUserAddRows="False" AutoGenerateColumns="False" >
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Транспортная компания" Binding="{Binding Companies.Name, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                                <DataGridTextColumn Header="Время приезда" Binding="{Binding Departure , Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                                <DataGridTextColumn Header="Время отъезда" Binding="{Binding Landing , Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                                <DataGridTextColumn Header="Цена" Binding="{Binding Cost, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <Button Grid.Row="1" Grid.Column="0" Content="Подтвердить" Command="{Binding AcceptButtonCom}" IsEnabled="{Binding IsEnableAcceptButton}"/>
+                    </Grid>
+                </TabItem.Content>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <Label Content="Принятые заявки"/>
+                </TabItem.Header>
+                <TabItem.Content>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="27"/>
+                            <ColumnDefinition Width="153"/>
+                            <ColumnDefinition Width="180px" />
+                            <ColumnDefinition Width="180px" />
+                            <ColumnDefinition Width="180px" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+
+                        </Grid.RowDefinitions>
+                        <DataGrid Grid.Row="0" Grid.ColumnSpan="6" ItemsSource="{Binding AwaitingTransport}" CanUserAddRows="False" AutoGenerateColumns="False" >
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Транспортная компания" Binding="{Binding Companies.Name, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                                <DataGridTextColumn Header="Время приезда" Binding="{Binding Departure , Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                                <DataGridTextColumn Header="Время отъезда" Binding="{Binding Landing , Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                                <DataGridTextColumn Header="Цена" Binding="{Binding Cost, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+
+                    </Grid>
+                </TabItem.Content>
+            </TabItem>
+        </TabControl>
+
+    </Grid>
+</Window>

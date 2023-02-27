@@ -1,0 +1,105 @@
+﻿<Window x:Class="Travel.V.TWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:Travel.VM"
+        mc:Ignorable="d"
+        Title="TravelWindow" Height="600" Width="1000">
+
+    <Window.DataContext>
+        <vm:MT/>
+    </Window.DataContext>
+    <Grid Margin="16">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="180px" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25" />
+            <RowDefinition Height="25" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Grid.Column="0">
+            <Button Command="{Binding ExitButtonCom}" Margin="0,0,0,0" Grid.Row="1" Grid.ColumnSpan="2" Content="Выйти" Padding="1,1,1,1" HorizontalContentAlignment="Center" />
+        </Grid>
+        <Grid Grid.Row="0" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="180px" />
+            </Grid.ColumnDefinitions>
+            <Button Command="{Binding OpenAddButtonCom}" Margin="0,0,0,0" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Content="Создать заявку" Padding="1,1,1,1" HorizontalContentAlignment="Center" />
+        </Grid>
+        <Grid Grid.Row="1" Grid.Column="0">
+            <Label Content="Список активных заявок" Grid.ColumnSpan="2" />
+        </Grid>
+        <ListBox Grid.Column="0" Grid.Row="2" ItemsSource="{Binding Requests}" SelectedItem="{Binding SelectedRequest}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Label ContentStringFormat="Заявка №{0}" Content="{Binding Path= Id}"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <Grid Grid.Column="1" Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="250" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="250" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Grid.Column="0" Margin="5,5,5,5" Content="Выбранная заявка:" />
+            <Label Grid.Row="0" Grid.Column="2"  Margin="5,5,5,5" ContentStringFormat="Заявка №{0}"  Content="{Binding SelectedRequest.Id}" />
+            <Label Grid.Row="1" Grid.Column="0" Margin="5,5,5,5" Content="Список билетов:" />
+            <DataGrid Grid.Row="2" Grid.ColumnSpan="3" AutoGenerateColumns="False" Margin="5,0,5,0" IsReadOnly="True" ItemsSource="{Binding SelectedRequest.Tickets}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Aвиакомпания" Binding="{Binding Companies.Name}" />
+                    <DataGridTextColumn Header="Номер рейса" Binding="{Binding FlightNumber}" />
+                    <DataGridTextColumn Header="Дата вылета" Binding="{Binding Departure}"/>
+                    <DataGridTextColumn Header="Дата прилёта" Binding ="{Binding Landing}"/>
+                    <DataGridTextColumn Header="Страна вылета" Binding="{Binding StartCountry}"/>
+                    <DataGridTextColumn Header="Город вылета" Binding="{Binding StartCity}"/>
+                    <DataGridTextColumn Header="Страна прилёта" Binding="{Binding EndCountry}"/>
+                    <DataGridTextColumn Header="Город вылета" Binding="{Binding EndCity}"/>
+                    <DataGridTextColumn Header="Цена" Binding="{Binding Cost}"/>
+                    <DataGridTextColumn Header="Паспорт пассажира" Binding="{Binding Clients.Passport}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <Label Grid.Row="3" Grid.Column="0" Content="Список номеров:" Margin="5,5,5,5"/>
+            <DataGrid Grid.Row="4"  Grid.ColumnSpan="3" AutoGenerateColumns="False" Margin="5,0,5,0" IsReadOnly="True" ItemsSource="{Binding SelectedRequest.HotelRooms}" >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Отель" Binding="{Binding Companies.Name}" />
+                    <DataGridTextColumn Header="День" Binding="{Binding Day}" />
+                    <DataGridTextColumn Header="Тип номера" Binding="{Binding Type}" />
+                    <DataGridTextColumn Header="Спальные места" Binding="{Binding MaxClient}"/>
+                    <DataGridTextColumn Header="Цена" Binding="{Binding Cost}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <Label Grid.Row="5" Content="Список клиентов:" Margin="5,5,5,5"/>
+            <DataGrid Grid.Row="6" Grid.ColumnSpan="3" AutoGenerateColumns="False" Margin="5,0,5,0" IsReadOnly="True" ItemsSource="{Binding SelectedRequest.Request_Client}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Имя" Binding="{Binding Clients.Name}" />
+                    <DataGridTextColumn Header="Фамилия" Binding="{Binding Clients.Surename}" />
+                    <DataGridTextColumn Header="Возраст" Binding="{Binding Clients.Age}" />
+                    <DataGridTextColumn Header="Паспорт" Binding="{Binding Clients.Passport}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <Label Grid.Row="7" Grid.Column="0" Margin="5,5,5,5" Content="Общая стоимость с учётом процента:" />
+            <Label Grid.Row="7" Grid.Column="2" Margin="5,5,5,5" Content="{Binding AllCost}" />
+            <Button Command="{Binding DeleteButtonCom}" Margin="5,5,5,0" Grid.Row="8" Grid.ColumnSpan="3" Content="Отменить заявку" Padding="1,1,1,1" HorizontalContentAlignment="Center" IsEnabled="{Binding IsCanDelete}" />
+
+        </Grid>
+    </Grid>
+
+</Window>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ff13d4f473174591a66de9c40a0e9756" Name="Diagram1">
+        <EntityTypeShape EntityType="NazarovTravelModel.Clients" Width="1.5" PointX="6.25" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="NazarovTravelModel.Companies" Width="1.5" PointX="0.75" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="NazarovTravelModel.HotelRooms" Width="1.5" PointX="3" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="NazarovTravelModel.Modules" Width="1.5" PointX="9.25" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NazarovTravelModel.Request_Client" Width="1.5" PointX="8.875" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="NazarovTravelModel.Requests" Width="1.5" PointX="5.25" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="NazarovTravelModel.Statuses" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="NazarovTravelModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NazarovTravelModel.Tickets" Width="1.5" PointX="12.25" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="NazarovTravelModel.Transport" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="NazarovTravelModel.Users" Width="1.5" PointX="6.75" PointY="10.625" IsExpanded="true" />
+        <AssociationConnector Association="NazarovTravelModel.FK_Request_Client_Clients" ManuallyRouted="false" />
+        <AssociationConnector Association="NazarovTravelModel.FK_Tickets_Clients" ManuallyRouted="false" />
+        <AssociationConnector Association="NazarovTravelModel.FK_HotelRooms_Companies" ManuallyRouted="false" />
+        <AssociationConnector Association="NazarovTravelModel.FK_Tickets_Companies" ManuallyRouted="false" />
+        <AssociationConnector Association="NazarovTravelModel.FK_Transport_Companies" ManuallyRouted="false" />
+        <AssociationConnector Association="NazarovTravelModel.FK_Users_Companies" ManuallyRouted="false" />
+        <AssociationConnector Association="NazarovTravelModel.FK_HotelRooms_Requests" ManuallyRouted="false" />
+        <AssociationConnector Association="NazarovTravelModel.FK_HotelRooms_Statuses" ManuallyRouted="false" />
+        <AssociationConnector Association="NazarovTravelModel.FK_Users_Modules" ManuallyRouted="false" />
+        <AssociationConnector Association="NazarovTravelModel.FK_Request_Client_Requests" ManuallyRouted="false" />
+        <AssociationConnector Association="NazarovTravelModel.FK_Requests_Transport" ManuallyRouted="false" />
+        <AssociationConnector Association="NazarovTravelModel.FK_Tickets_Requests" ManuallyRouted="false" />
+        <AssociationConnector Association="NazarovTravelModel.FK_Tickets_Statuses" ManuallyRouted="false" />
+        <AssociationConnector Association="NazarovTravelModel.FK_Transport_Statuses" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
